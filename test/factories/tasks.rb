@@ -4,7 +4,6 @@ FactoryBot.define do
     description
     author_id { 1 }
     assignee_id { 1 }
-    state { '' }
     expired_at
   end
 end
