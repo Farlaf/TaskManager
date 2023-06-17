@@ -7,8 +7,8 @@ class SessionForm
   )
 
   validates :email, presence: true, format: { with: /\A\S+@.+\.\S+\z/ }
-  validates :password, presense: true
-  validates :user_valid?
+  validates :password, presence: true
+  validate :user_valid?
 
   def user
     User.find_by(email: email)
