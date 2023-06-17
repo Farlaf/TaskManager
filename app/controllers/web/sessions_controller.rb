@@ -1,6 +1,6 @@
 class Web::SessionsController < Web::ApplicationController
   def new
-    @sesiion = SessionForm.new
+    @session = SessionForm.new
   end
 
   def create
