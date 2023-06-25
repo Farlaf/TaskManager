@@ -1,40 +1,42 @@
-doctype html
-html lang="en"
-  head
-    meta charset="utf-8"
-    meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"
-    meta name="viewport" content="width=device-width, initial-scale=1.0"
-    title= content_for?(:title) ? yield(:title) : "Task Manager"
-    link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"
-    = stylesheet_link_tag "application", media: "all"
-    = csrf_meta_tags
-    - if !Rails.env.development?
-      = stylesheet_packs_with_chunks_tag "application", media: "all"
+ doctype html
+ html lang="en"
+   head
+     meta charset="utf-8"
+     meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"
+     meta name="viewport" content="width=device-width, initial-scale=1.0"
+     title= content_for?(:title) ? yield(:title) : "Task Manager"
+     link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"
+     = stylesheet_link_tag "application"
+     = csrf_meta_tags
+     - if !Rails.env.development?
+       = stylesheet_packs_with_chunks_tag "application", media: "all"
 
 
-  body
-    = javascript_packs_with_chunks_tag 'application'
-    header.mdl-layout__header
-      .mdl-layout__header-row
-        .material-icons tab
-        label.mdl-button.mdl-js-button.mdl-button--icon
-          i.material-icons
-        span.mdl-layout-title
-          = "Task Manager"
-        .mdl-layout-spacer
-        nav.mdl-navigation
-          = link_to "Board", board_path, class: 'mdl-navigation__link'
-          - if current_user
-            - if current_user.is_a? Admin
-              = link_to "Admin page", admin_users_url, class: 'mdl-navigation__link'
-            = link_to "Log out", session_path, method: "delete", confirm: "confirm?", class: 'mdl-navigation__link'
-          - else
-            = link_to "Sign in", new_session_path, class: 'mdl-navigation__link'
-            = link_to "Sign up", new_developer_path, class: 'mdl-navigation__link'
-    main#main.mdl-layout__content
-      .page-content
-        = yield
-    footer#footer.mdl-mini-footer
-      .mdl-mini-footer__left-section
-        .mdl-logo
-          | &copy; Dualboot Learn 2022
+   body
+     = javascript_packs_with_chunks_tag 'application'
+     header.mdl-layout__header
+       .mdl-layout__header-row
+         .material-icons tab
+         label.mdl-button.mdl-js-button.mdl-button--icon
+           i.material-icons
+         span.mdl-layout-title
+           = "Task Manager"
+         .mdl-layout-spacer
+         nav.mdl-navigation
+           = link_to "Board", board_path, class: 'mdl-navigation__link'
+           - if current_user
+             - if current_user.is_a? Admin
+               = link_to "Admin page", admin_users_url, class: 'mdl-navigation__link'
+             = current_user.first_name
+             = link_to "Log out", session_path, method: "delete", confirm: "confirm?", class: 'mdl-navigation__link'
+           - else
+             = link_to "Sign in", new_session_path, class: 'mdl-navigation__link'
+             = link_to "Sign up", new_developer_path, class: 'mdl-navigation__link'
+
+     main#main.mdl-layout__content
+       .page-content
+         = yield
+     footer#footer.mdl-mini-footer
+       .mdl-mini-footer__left-section
+         .mdl-logo
+           | &copy; Dualboot Learn 2023
