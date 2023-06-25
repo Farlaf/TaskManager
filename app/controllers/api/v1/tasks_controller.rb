@@ -1,2 +1,2 @@
-class API::V1::TakskController < API::V1::ApplicationController
+class Api::V1::TakskController < Api::V1::ApplicationController
 end
