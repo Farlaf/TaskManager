@@ -30,12 +30,12 @@ class Api::V1::TasksControllerTest < ActionController::TestCase
   end
 
   test 'should put update' do
-    author = create :user
-    assignee = create :user
-    task = create :task, author: author
-    task_attributes = attributes_for(:task)
-      .merge({ author_id: author.id, assignee_id: assignee.id })
-      .stringify_keys
+    author = create(:user)
+    assignee = create(:user)
+    task = create(:task, author: author)
+    task_attributes = attributes_for(:task).
+      merge({ author_id: author.id, assignee_id: assignee.id }).
+      stringify_keys
 
     patch :update, params: { id: task.id, format: :json, task: task_attributes }
     assert_response :success
@@ -44,12 +44,12 @@ class Api::V1::TasksControllerTest < ActionController::TestCase
     assert_equal task.slice(*task_attributes.keys), task_attributes
   end
 
-  # test 'should delete destroy' do
-  #   author = create :user
-  #   task = create :task, author: author
-  #   delete :destroy, params: { id: task.id, format: :json }
-  #   assert_response :success
+  test 'should delete destroy' do
+    author = create(:user)
+    task = create(:task, author: author)
+    delete :destroy, params: { id: task.id, format: :json }
+    assert_response :success
 
-  #   assert !Task.where(id: task.id).exists?
-  # end
+    assert !Task.where(id: task.id).exists?
+  end
 end
