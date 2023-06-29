@@ -11,7 +11,4 @@ FactoryBot.define do
   sequence :text, aliases: [:description] do |n|
     "Lorem #{n} ipsum dolor sit amet consectetur adipisicing elit. A consequuntur officia nobis id."
   end
-  sequence :expired_at do
-    Time.now + 2.weeks
-  end
 end
