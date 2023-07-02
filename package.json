@@ -2,6 +2,7 @@
     "name": "task-manager",
     "private": true,
     "dependencies": {
+        "@asseinfo/react-kanban": "^2.2.0",
         "@babel/eslint-parser": "^7.22.5",
         "@babel/preset-react": "^7.22.5",
         "@rails/actioncable": "^6.0.0",
