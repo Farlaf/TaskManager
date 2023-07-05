@@ -11,8 +11,6 @@ import useStyles from './useStyles';
 function Task({ task }) {
   const styles = useStyles();
 
-  console.log(styles);
-
   return (
     <Card className={styles.root}>
       <CardHeader title={task.name} />
