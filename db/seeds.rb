@@ -10,3 +10,14 @@ admin.save
   u.password = "#{i}"
   u.save
 end
+
+25.times do |i|
+  d = Developer.first
+  m = Manager.first
+  t = Task.new
+  t.assignee = d
+  t.author = m
+  t.name = "TN #{i}"
+  t.description = "TD #{i}"
+  t.save
+end
