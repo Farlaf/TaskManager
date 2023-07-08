@@ -5,6 +5,7 @@ import { propOr } from 'ramda';
 
 import TasksRepository from '../../repositories/TasksRepository';
 import Task from '../Task';
+import ColumnHeader from '../ColumnHeader';
 
 const STATES = [
   { key: 'new_task', value: 'New' },
@@ -45,6 +46,16 @@ function TaskBoard() {
     });
   };
 
+  const loadColumnMore = (state, page = 1, perPage = 10) => {
+    loadColumn(state, page, perPage).then(({ data }) => {
+      console.log([...boardCards[state].cards, ...data.items]);
+      setBoardCards((prevState) => ({
+        ...prevState,
+        [state]: { cards: [...boardCards[state].cards, ...data.items], meta: data.meta },
+      }));
+    });
+  };
+
   const generateBoard = () => {
     const boardForGeneration = {
       columns: STATES.map(({ key, value }) => ({
@@ -66,7 +77,11 @@ function TaskBoard() {
   useEffect(() => generateBoard(), [boardCards]);
 
   return (
-    <KanbanBoard disableColumnDrag renderCard={(card) => <Task task={card} />}>
+    <KanbanBoard
+      disableColumnDrag
+      renderCard={(card) => <Task task={card} />}
+      renderColumnHeader={(column) => <ColumnHeader column={column} onLoadMore={loadColumnMore} />}
+    >
       {board}
     </KanbanBoard>
   );
