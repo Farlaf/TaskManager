@@ -6,6 +6,10 @@ import { propOr } from 'ramda';
 import TasksRepository from '../../repositories/TasksRepository';
 import Task from '../Task';
 import ColumnHeader from '../ColumnHeader';
+import { Fab } from '@material-ui/core';
+import LibraryAddOutlined from '@material-ui/icons/LibraryAddOutlined';
+
+import useStyles from './useStyles';
 
 const STATES = [
   { key: 'new_task', value: 'New' },
@@ -29,6 +33,8 @@ const initialBoard = {
 function TaskBoard() {
   const [board, setBoard] = useState(initialBoard);
   const [boardCards, setBoardCards] = useState([]);
+
+  const styles = useStyles();
 
   const loadColumn = (state, page, perPage) =>
     TasksRepository.index({
@@ -92,14 +98,20 @@ function TaskBoard() {
   useEffect(() => generateBoard(), [boardCards]);
 
   return (
-    <KanbanBoard
-      disableColumnDrag
-      renderCard={(card) => <Task task={card} />}
-      onCardDragEnd={handleCardDragEnd}
-      renderColumnHeader={(column) => <ColumnHeader column={column} onLoadMore={loadColumnMore} />}
-    >
-      {board}
-    </KanbanBoard>
+    <>
+      <Fab className={styles.addButton} color="primary" aria-label="add">
+        <LibraryAddOutlined />
+      </Fab>
+
+      <KanbanBoard
+        disableColumnDrag
+        renderCard={(card) => <Task task={card} />}
+        onCardDragEnd={handleCardDragEnd}
+        renderColumnHeader={(column) => <ColumnHeader column={column} onLoadMore={loadColumnMore} />}
+      >
+        {board}
+      </KanbanBoard>
+    </>
   );
 }
 
