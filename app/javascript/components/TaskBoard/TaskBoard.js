@@ -10,6 +10,8 @@ import { Fab } from '@material-ui/core';
 import LibraryAddOutlined from '@material-ui/icons/LibraryAddOutlined';
 
 import useStyles from './useStyles';
+import AddPopup from '../AddPopup/AddPopup';
+import TaskForm from '../../forms/TaskForm';
 
 const STATES = [
   { key: 'new_task', value: 'New' },
@@ -30,11 +32,25 @@ const initialBoard = {
   })),
 };
 
+const MODES = {
+  ADD: 'add',
+  NONE: 'none',
+};
+
 function TaskBoard() {
   const [board, setBoard] = useState(initialBoard);
   const [boardCards, setBoardCards] = useState([]);
+  const [mode, setMode] = useState(MODES.NONE);
 
   const styles = useStyles();
+
+  const handleAddPopupOpen = () => {
+    setMode(MODES.ADD);
+  };
+
+  const handleClose = () => {
+    setMode(MODES.NONE);
+  };
 
   const loadColumn = (state, page, perPage) =>
     TasksRepository.index({
@@ -43,7 +59,7 @@ function TaskBoard() {
       perPage,
     });
 
-  const loadColumnInitial = (state, page = 1, perPage = 10) => {
+  const loadColumnInitial = (state, page = 1, perPage = 5) => {
     loadColumn(state, page, perPage).then(({ data }) => {
       setBoardCards((prevState) => ({
         ...prevState,
@@ -52,7 +68,7 @@ function TaskBoard() {
     });
   };
 
-  const loadColumnMore = (state, page = 1, perPage = 10) => {
+  const loadColumnMore = (state, page = 1, perPage = 5) => {
     loadColumn(state, page, perPage).then(({ data }) => {
       setBoardCards((prevState) => ({
         ...prevState,
@@ -94,12 +110,20 @@ function TaskBoard() {
       });
   };
 
+  const handleTaskCreate = (params) => {
+    const attributes = TaskForm.attributesToSubmit(params);
+    return TasksRepository.create(attributes).then(({ data: { task } }) => {
+      loadColumnInitial(task.state);
+      handleClose();
+    });
+  };
+
   useEffect(() => loadBoard(), []);
   useEffect(() => generateBoard(), [boardCards]);
 
   return (
     <>
-      <Fab className={styles.addButton} color="primary" aria-label="add">
+      <Fab onClick={handleAddPopupOpen} className={styles.addButton} color="primary" aria-label="add">
         <LibraryAddOutlined />
       </Fab>
 
@@ -111,6 +135,8 @@ function TaskBoard() {
       >
         {board}
       </KanbanBoard>
+
+      {mode === MODES.ADD && <AddPopup onCardCreate={handleTaskCreate} onClose={handleClose} />}
     </>
   );
 }

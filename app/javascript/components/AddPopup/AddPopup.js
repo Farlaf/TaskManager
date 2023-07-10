@@ -14,7 +14,6 @@ function AddPopup({ onClose, onCardCreate }) {
   const [task, changeTask] = useState(TaskForm.defaultAttributes());
   const [isSaving, setSaving] = useState(false);
   const [errors, setErrors] = useState({});
-
   const handleCreate = () => {
     setSaving(true);
 
@@ -23,13 +22,11 @@ function AddPopup({ onClose, onCardCreate }) {
       setErrors(error || {});
 
       if (error instanceof Error) {
-        alert(`Creation Failed! Error: ${error.messsage}`);
+        alert(`Creation Failed! Error: ${error.message}`);
       }
     });
   };
-
   const handleChangeTextField = (fieldName) => (event) => changeTask({ ...task, [fieldName]: event.target.value });
-
   const styles = useStyles();
 
   return (
@@ -66,7 +63,7 @@ function AddPopup({ onClose, onCardCreate }) {
           </div>
         </CardContent>
         <CardActions className={styles.actions}>
-          <Button disabled={isSaving} onClick={handleCreate} variant="contained" size="smal" color="promary">
+          <Button disabled={isSaving} onClick={handleCreate} variant="contained" size="small" color="primary">
             Add
           </Button>
         </CardActions>
