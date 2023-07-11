@@ -5,9 +5,7 @@ import { has } from 'ramda';
 import TaskForm from 'forms/TaskForm';
 import useStyles from './useStyles';
 
-import Modal from '@material-ui/core/Modal';
-import { Button, Card, CardActions, CardContent, IconButton, TextField } from '@material-ui/core';
-import CardHeader from '@material-ui/core/CardHeader';
+import { Modal, Button, Card, CardActions, CardContent, IconButton, TextField, CardHeader } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 
 function AddPopup({ onClose, onCardCreate }) {
