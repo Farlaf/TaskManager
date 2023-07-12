@@ -14,7 +14,7 @@ import {
   CardHeader,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import Form from './Form';
+import Form from './components/Form';
 
 function EditPopup({ cardId, onClose, onCardDestroy, onCardLoad, onCardUpdate }) {
   const [task, setTask] = useState(null);
