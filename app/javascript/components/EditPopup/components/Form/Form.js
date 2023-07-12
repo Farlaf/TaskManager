@@ -36,6 +36,7 @@ function Form({ errors, onChange, task }) {
       <UserSelect
         label="Author"
         value={task.author}
+        userType="Manager"
         onChange={handleChangeSelect('author')}
         isRequired
         error={has('author', errors)}
@@ -44,6 +45,7 @@ function Form({ errors, onChange, task }) {
       <UserSelect
         label="Asignee"
         value={task.assignee}
+        userType="Developer"
         onChange={handleChangeSelect('assignee')}
         error={has('assignee', errors)}
         helperText={errors.assignee}

@@ -10,11 +10,13 @@ import useStyles from './useStyles';
 
 import UserPresenter from '../../presenters/UserPresenter';
 
-function UserSelect({ error, label, isClearable, isDisabled, isRequired, onChange, value, helperText }) {
+function UserSelect({ error, label, isClearable, isDisabled, isRequired, onChange, value, helperText, userType }) {
   const [isFocused, setFocus] = useState(false);
   const styles = useStyles();
   const handleLoadOptions = (inputValue) =>
-    UsersRepository.index({ q: { firstNameOrLastNameCont: inputValue } }).then(({ data }) => data.items);
+    UsersRepository.index({ q: { firstNameOrLastNameCont: inputValue, type_eq: userType } }).then(
+      ({ data }) => data.items,
+    );
 
   return (
     <FormControl margin="dense" disabled={isDisabled} focused={isFocused} error={error} required={isRequired}>
@@ -45,7 +47,7 @@ UserSelect.defaultProps = {
   isClearable: true,
   isDisabled: false,
   isRequired: false,
-  value: PropTypes.shape(),
+  value: UserPresenter.shape(),
   helperText: undefined,
 };
 
@@ -56,7 +58,8 @@ UserSelect.propTypes = {
   isDisabled: PropTypes.bool,
   isRequired: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.shape(),
+  value: UserPresenter.shape(),
+  userType: UserPresenter.type.isRequired,
   helperText: PropTypes.oneOfType(PropTypes.string, PropTypes.arrayOf(PropTypes.string)),
 };
 
