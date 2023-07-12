@@ -14,7 +14,7 @@ import {
   CardHeader,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import EditTaskForm from '../../forms/EditTaskForm';
+import Form from './Form';
 
 function EditPopup({ cardId, onClose, onCardDestroy, onCardLoad, onCardUpdate }) {
   const [task, setTask] = useState(null);
@@ -67,7 +67,7 @@ function EditPopup({ cardId, onClose, onCardDestroy, onCardLoad, onCardUpdate })
               <CircularProgress />
             </div>
           ) : (
-            <EditTaskForm errors={errors} onChange={setTask} task={task} />
+            <Form errors={errors} onChange={setTask} task={task} />
           )}
         </CardContent>
         <CardActions className={styles.actions}>
