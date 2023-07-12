@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 
 import useStyles from './useStyles';
 
-function Form({ errors, onChange, task }) {
+function EditTaskForm({ errors, onChange, task }) {
   const handleChangeTextField = (fieldName) => (event) => onChange({ ...task, [fieldName]: event.target.value });
   const styles = useStyles();
 
@@ -35,7 +35,7 @@ function Form({ errors, onChange, task }) {
   );
 }
 
-Form.propTypes = {
+EditTaskForm.propTypes = {
   onChange: PropTypes.func.isRequired,
   task: PropTypes.shape().isRequired,
   errors: PropTypes.shape({
@@ -46,8 +46,8 @@ Form.propTypes = {
   }),
 };
 
-Form.defaultProps = {
+EditTaskForm.defaultProps = {
   errors: {},
 };
 
-export default Form;
+export default EditTaskForm;
