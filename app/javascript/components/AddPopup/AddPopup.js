@@ -7,7 +7,7 @@ import useStyles from './useStyles';
 
 import { Modal, Button, Card, CardActions, CardContent, IconButton, TextField, CardHeader } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import TaskPresenter from '../../presenters/TaskPresenter';
+import TaskPresenter from 'presenters/TaskPresenter';
 
 function AddPopup({ onClose, onCardCreate }) {
   const [task, changeTask] = useState(TaskForm.defaultAttributes());

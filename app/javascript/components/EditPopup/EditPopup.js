@@ -15,7 +15,7 @@ import {
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import Form from './components/Form';
-import TaskPresenter from '../../presenters/TaskPresenter';
+import TaskPresenter from 'presenters/TaskPresenter';
 
 function EditPopup({ cardId, onClose, onCardDestroy, onCardLoad, onCardUpdate }) {
   const [task, setTask] = useState(null);

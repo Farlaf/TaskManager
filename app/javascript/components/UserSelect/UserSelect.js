@@ -8,7 +8,7 @@ import UsersRepository from 'repositories/UsersRepository';
 
 import useStyles from './useStyles';
 
-import UserPresenter from '../../presenters/UserPresenter';
+import UserPresenter from 'presenters/UserPresenter';
 
 function UserSelect({ error, label, isClearable, isDisabled, isRequired, onChange, value, helperText, userType }) {
   const [isFocused, setFocus] = useState(false);

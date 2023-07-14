@@ -5,7 +5,7 @@ import { Card, CardHeader, CardContent, Typography, IconButton } from '@material
 import Edit from '@material-ui/icons/Edit';
 import useStyles from './useStyles';
 
-import TaskPresenter from '../../presenters/TaskPresenter';
+import TaskPresenter from 'presenters/TaskPresenter';
 
 function Task({ task, onClick }) {
   const styles = useStyles();

@@ -3,7 +3,7 @@ import KanbanBoard from '@asseinfo/react-kanban';
 import '@asseinfo/react-kanban/dist/styles.css';
 import { propOr } from 'ramda';
 
-import TasksRepository from '../../repositories/TasksRepository';
+import TasksRepository from 'repositories/TasksRepository';
 import Task from '../Task';
 import ColumnHeader from '../ColumnHeader';
 import { Fab } from '@material-ui/core';
@@ -11,9 +11,9 @@ import LibraryAddOutlined from '@material-ui/icons/LibraryAddOutlined';
 
 import useStyles from './useStyles';
 import AddPopup from '../AddPopup/AddPopup';
-import TaskForm from '../../forms/TaskForm';
+import TaskForm from 'forms/TaskForm';
 import EditPopup from '../EditPopup';
-import TaskPresenter from '../../presenters/TaskPresenter';
+import TaskPresenter from 'presenters/TaskPresenter';
 
 const STATES = [
   { key: 'new_task', value: 'New' },
