@@ -4,15 +4,15 @@ import '@asseinfo/react-kanban/dist/styles.css';
 import { propOr } from 'ramda';
 
 import TasksRepository from 'repositories/TasksRepository';
-import Task from '../Task';
-import ColumnHeader from '../ColumnHeader';
+import Task from 'components/Task';
+import ColumnHeader from 'components/ColumnHeader';
 import { Fab } from '@material-ui/core';
 import LibraryAddOutlined from '@material-ui/icons/LibraryAddOutlined';
 
 import useStyles from './useStyles';
-import AddPopup from '../AddPopup/AddPopup';
+import AddPopup from 'components/AddPopup/AddPopup';
 import TaskForm from 'forms/TaskForm';
-import EditPopup from '../EditPopup';
+import EditPopup from 'components/EditPopup';
 import TaskPresenter from 'presenters/TaskPresenter';
 
 const STATES = [
