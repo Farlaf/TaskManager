@@ -5,6 +5,8 @@ import { Card, CardHeader, CardContent, Typography, IconButton } from '@material
 import Edit from '@material-ui/icons/Edit';
 import useStyles from './useStyles';
 
+import TaskPresenter from 'presenters/TaskPresenter';
+
 function Task({ task, onClick }) {
   const styles = useStyles();
 
@@ -15,14 +17,14 @@ function Task({ task, onClick }) {
     </IconButton>
   );
 
-  <CardHeader action={action} title={task.name} />;
+  <CardHeader action={action} title={TaskPresenter.name(task)} />;
 
   return (
     <Card className={styles.root}>
-      <CardHeader action={action} title={task.name} />
+      <CardHeader action={action} title={TaskPresenter.name(task)} />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          {task.description}
+          {TaskPresenter.description(task)}
         </Typography>
       </CardContent>
     </Card>
@@ -30,7 +32,7 @@ function Task({ task, onClick }) {
 }
 
 Task.propTypes = {
-  task: PropTypes.shape().isRequired,
+  task: TaskPresenter.shape().isRequired,
   onClick: PropTypes.func.isRequired,
 };
 
