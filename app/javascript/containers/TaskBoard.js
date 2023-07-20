@@ -19,7 +19,7 @@ const MODES = {
 };
 
 function TaskBoard() {
-  const { board, loadBoard, loadMore } = useTasks();
+  const { board, loadBoard, loadMoreTasks, loadTask, updateTask, destroyTask, moveTask } = useTasks();
   const [mode, setMode] = useState(MODES.NONE);
   const [openedTaskId, setOpenedTaskId] = useState(null);
   const styles = useStyles();
@@ -43,9 +43,11 @@ function TaskBoard() {
   };
 
   const loadColumnMore = (state, page = 1, perPage = 5) => {
-    loadMore(state, page, perPage);
+    loadMoreTasks(state, page, perPage);
   };
-  const handleCardDragEnd = () => {};
+  const handleCardDragEnd = (task, source, destination) => {
+    moveTask(task, source, destination);
+  };
   const handleTaskCreate = () => {};
   const handleTaskLoad = () => {};
   const handleTaskUpdate = () => {};
