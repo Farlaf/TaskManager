@@ -74,15 +74,18 @@ export const useTasksActions = () => {
 
   const loadBoard = () => STATES.map(({ key }) => loadColumn(key));
 
-  const getTask = (id) => TasksRepository.show(id).then(({ data: { task } }) => task);
-
   const updateTask = (id, q) => TasksRepository.update(id, q);
+
+  const createTask = (attributes) => TasksRepository.create(attributes);
+
+  // const getTask = (id) => TasksRepository.show(id).then(({ data: { task } }) => task);
 
   return {
     loadBoard,
     loadColumn,
     loadColumnMore,
-    getTask,
     updateTask,
+    createTask,
+    // getTask,
   };
 };

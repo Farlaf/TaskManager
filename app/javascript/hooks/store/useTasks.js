@@ -1,10 +1,11 @@
 import { useSelector } from 'react-redux';
 import { useTasksActions } from 'slices/TasksSlice';
 import TaskPresenter, { STATES } from 'presenters/TaskPresenter';
+import TaskForm from 'forms/TaskForm';
 
 const useTasks = () => {
   const board = useSelector((state) => state.TasksSlice.board);
-  const { loadColumn, loadColumnMore, getTask, updateTask } = useTasksActions();
+  const { loadColumn, loadColumnMore, getTask, updateTask, createTask } = useTasksActions();
 
   const loadBoard = () => Promise.all(STATES.map(({ key }) => loadColumn(key)));
 
@@ -28,12 +29,20 @@ const useTasks = () => {
       });
   };
 
+  const addTask = (params) => {
+    const attributes = TaskForm.attributesToSubmit(params);
+    return createTask(attributes).then(({ data: { task } }) => {
+      loadColumn(TaskPresenter.state(task));
+    });
+  };
+
   return {
     board,
     loadBoard,
     loadMoreTasks,
     loadTask,
     moveTask,
+    addTask,
   };
 };
 
