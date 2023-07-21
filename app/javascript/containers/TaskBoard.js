@@ -48,10 +48,7 @@ function TaskBoard() {
   const handleCardDragEnd = (task, source, destination) => {
     moveTask(task, source, destination);
   };
-  const handleTaskCreate = (params) => {
-    addTask(params);
-    handleClose();
-  };
+  const handleTaskCreate = (params) => addTask(params, handleClose);
   const handleTaskLoad = () => {};
   const handleTaskUpdate = () => {};
   const handleTaskDestroy = () => {};

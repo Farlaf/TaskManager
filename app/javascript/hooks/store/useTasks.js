@@ -29,10 +29,11 @@ const useTasks = () => {
       });
   };
 
-  const addTask = (params) => {
+  const addTask = (params, handleClose) => {
     const attributes = TaskForm.attributesToSubmit(params);
     return createTask(attributes).then(({ data: { task } }) => {
       loadColumn(TaskPresenter.state(task));
+      handleClose();
     });
   };
 
