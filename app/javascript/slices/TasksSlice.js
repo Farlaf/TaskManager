@@ -78,7 +78,9 @@ export const useTasksActions = () => {
 
   const createTask = (attributes) => TasksRepository.create(attributes);
 
-  // const getTask = (id) => TasksRepository.show(id).then(({ data: { task } }) => task);
+  const showTask = (id) => TasksRepository.show(id).then(({ data: { task } }) => task);
+
+  const destroyTask = (id) => TasksRepository.destroy(id);
 
   return {
     loadBoard,
@@ -86,6 +88,7 @@ export const useTasksActions = () => {
     loadColumnMore,
     updateTask,
     createTask,
-    // getTask,
+    showTask,
+    destroyTask,
   };
 };

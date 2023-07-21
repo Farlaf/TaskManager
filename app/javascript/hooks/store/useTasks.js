@@ -5,13 +5,11 @@ import TaskForm from 'forms/TaskForm';
 
 const useTasks = () => {
   const board = useSelector((state) => state.TasksSlice.board);
-  const { loadColumn, loadColumnMore, getTask, updateTask, createTask } = useTasksActions();
+  const { loadColumn, loadColumnMore, destroyTask, updateTask, createTask, showTask } = useTasksActions();
 
   const loadBoard = () => Promise.all(STATES.map(({ key }) => loadColumn(key)));
 
   const loadMoreTasks = (state, page, perPage) => loadColumnMore(state, page, perPage);
-
-  const loadTask = (id) => getTask(id);
 
   const moveTask = (task, source, destination) => {
     const transition = TaskPresenter.transitions(task).find(({ to }) => destination.toColumnId === to);
@@ -37,6 +35,23 @@ const useTasks = () => {
     });
   };
 
+  const loadTask = (id) => showTask(id);
+
+  const deleteTask = (task, handleClose) =>
+    destroyTask(TaskPresenter.id(task)).then(() => {
+      loadColumn(TaskPresenter.state(task));
+      handleClose();
+    });
+
+  const editTask = (task, handleClose) => {
+    const attributes = TaskForm.attributesToSubmit(task);
+
+    return updateTask(TaskPresenter.id(task), attributes).then(() => {
+      loadColumn(TaskPresenter.state(task));
+      handleClose();
+    });
+  };
+
   return {
     board,
     loadBoard,
@@ -44,6 +59,8 @@ const useTasks = () => {
     loadTask,
     moveTask,
     addTask,
+    deleteTask,
+    editTask,
   };
 };
 
