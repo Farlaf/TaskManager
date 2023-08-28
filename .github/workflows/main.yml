@@ -20,3 +20,5 @@ jobs:
         run: docker-compose --file docker-compose.ci.yml run ci
       - name: Coveralls
         uses: coverallsapp/github-action@v2
+        with:
+          path-to-lcov: ${{ github.workspace }}/coverage/lcov.info
