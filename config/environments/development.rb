@@ -75,4 +75,5 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   config.hosts << '.app.uffizzi.com'
+  config.hosts << 'oleg-trello-clone.fly.dev'
 end
