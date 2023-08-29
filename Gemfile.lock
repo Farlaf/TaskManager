@@ -90,8 +90,6 @@ GEM
     crass (1.0.6)
     date (3.3.3)
     docile (1.4.0)
-    dockerfile-rails (1.5.3)
-      rails
     erubi (1.12.0)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
@@ -153,8 +151,6 @@ GEM
     nio4r (2.5.9)
     nokogiri (1.15.4)
       mini_portile2 (~> 2.8.2)
-      racc (~> 1.4)
-    nokogiri (1.15.4-x86_64-linux)
       racc (~> 1.4)
     parallel (1.23.0)
     parser (3.2.2.3)
@@ -309,7 +305,6 @@ GEM
 
 PLATFORMS
   ruby
-  x86_64-linux
 
 DEPENDENCIES
   active_model_serializers
@@ -317,7 +312,6 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   capybara (>= 3.26)
-  dockerfile-rails (>= 1.5)
   factory_bot_rails
   jbuilder (~> 2.7)
   js-routes
