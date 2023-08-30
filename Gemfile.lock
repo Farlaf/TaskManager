@@ -350,6 +350,7 @@ DEPENDENCIES
   kaminari
   listen (~> 3.3)
   net-http
+  nokogiri (>= 1.15.4)
   pg (~> 1.1)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
