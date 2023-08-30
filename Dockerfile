@@ -9,6 +9,8 @@ RUN apk update \
 
 RUN gem install bundler:2.1.4
 
+RUN bundle update rake
+
 RUN mkdir $RAILS_ROOT
 WORKDIR $RAILS_ROOT
 
