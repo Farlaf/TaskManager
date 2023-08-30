@@ -1,13 +1,19 @@
 databases:
   - name: postgres
     databaseName: task_manager
-    user: mysite
+    user: task_manager
+    region: frankfurt
+    plan: free
+    postgresMajorVersion: 13
+    ipAllowList: []
 
 services:
   - type: web
     name: task_manager
     runtime: ruby
+    region: frankfurt
     plan: free
+    env: ruby
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
