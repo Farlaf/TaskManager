@@ -5,7 +5,6 @@ databases:
     region: frankfurt
     plan: free
     postgresMajorVersion: 13
-    ipAllowList: []
 
 services:
   - type: web
