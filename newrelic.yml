@@ -1,0 +1,34 @@
+common: &default_settings
+  license_key: 'eu01xxb03ced25c1c03f7382b5567967FFFFNRAL'
+
+  app_name: 'Task Manager'
+
+  distributed_tracing:
+    enabled: true
+
+  log_level: info
+
+  application_logging:
+    enabled: true
+    forwarding:
+      enabled: true
+      max_samples_stored: 10000
+    metrics:
+      enabled: true
+    local_decorating:
+      enabled: false
+
+development:
+  <<: *default_settings
+  app_name: 'Task Manager (Development)'
+
+test:
+  <<: *default_settings
+  monitor_mode: false
+
+staging:
+  <<: *default_settings
+  app_name: 'Task Manager (Staging)'
+
+production:
+  <<: *default_settings
