@@ -31,7 +31,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails'
   gem 'rubocop'
-  gem "bullet"
+  gem 'bullet'
 end
 
 group :development do
@@ -70,3 +70,4 @@ gem 'webpacker-react'
 gem 'js-routes'
 gem 'net-http'
 gem 'nokogiri', '>= 1.15.4'
+gem 'rollbar'
