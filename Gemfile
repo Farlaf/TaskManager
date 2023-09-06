@@ -71,3 +71,5 @@ gem 'js-routes'
 gem 'net-http'
 gem 'nokogiri', '>= 1.15.4'
 gem 'rollbar'
+
+gem 'newrelic_rpm'
