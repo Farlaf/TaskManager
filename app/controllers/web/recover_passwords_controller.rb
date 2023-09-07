@@ -8,12 +8,11 @@ class Web::RecoverPasswordsController < Web::ApplicationController
 
     if @recover.valid?
       # отправить письмо
-      pp 'set email with password'
+      pp('set email with password')
       redirect_to(:new_session)
     else
       render(:new)
     end
-
   end
 
   def set

@@ -1,4 +1,4 @@
-require "test_helper"
+require 'test_helper'
 
 class Web::RecoverPasswordsControllerTest < ActionController::TestCase
   test 'should get new' do
