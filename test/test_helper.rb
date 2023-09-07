@@ -14,7 +14,7 @@ if ENV['CI']
 
     end
 
-    add_filter ['version.rb', 'initializer.rb']
+    add_filter ['version.rb', 'initializer.rb', 'initializer.rb', 'config.rb']
   end
 end
 
@@ -24,14 +24,14 @@ require 'rails/test_help'
 
 class ActiveSupport::TestCase
   include ActionMailer::TestHelper
-
+  include AuthHelper
   # Run tests in parallel with specified workers
-  parallelize(workers: :number_of_processors)
+  ENV['RAILS_ENV'] || parallelize(workers: :number_of_processors)
 
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
-  fixtures :all
+  # fixtures :all
 
   # Add more helper methods to be used by all tests here...
-  include AuthHelper
+
   include FactoryBot::Syntax::Methods
 end
