@@ -1,0 +1,6 @@
+h4 Get email with link to recover password
+= simple_form_for @recover, url: recover_passwords_path do |f|
+    p
+        = f.input :email
+    p
+        = f.button :submit, "Get link"
