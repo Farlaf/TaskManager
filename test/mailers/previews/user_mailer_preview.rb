@@ -1,3 +1,23 @@
 # Preview all emails at http://localhost:3000/rails/mailers/user_mailer
 class UserMailerPreview < ActionMailer::Preview
+  def task_created
+    UserMailer.with(mail_info).task_created
+  end
+
+  def task_updated
+    UserMailer.with(mail_info).task_updated
+  end
+
+  def task_deleted
+    UserMailer.with(mail_info).task_destroy
+  end
+
+  private
+
+  def mail_info
+    user = User.first
+    task = Task.first
+
+    params = { user: user, task: task }
+  end
 end
