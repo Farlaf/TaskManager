@@ -1,10 +1,10 @@
 class Web::RecoverPasswordsController < Web::ApplicationController
   def new
-    @recover = RecoverPasswordForm.new
+    @recover = RecoverPasswordFormNew.new
   end
 
   def create
-    @recover = RecoverPasswordForm.new(recover_params)
+    @recover = RecoverPasswordFormNew.new(recover_params)
 
     if @recover.valid?
       user = @recover.user
@@ -15,21 +15,43 @@ class Web::RecoverPasswordsController < Web::ApplicationController
 
       UserMailer.with({ user: user }).recover_password.deliver_now
 
-      redirect_to(:new_session)
+      redirect_to(root_url)
     else
       render(:new)
     end
   end
 
   def edit
-    # форма куда вводить пароли
+    @new_password = RecoverPasswordFormEdit.new
   end
 
   def update
-    # обновление паролей
+    @new_password = RecoverPasswordFormEdit.new(new_pass_params)
+
+    render(:edit) unless @new_password.valid? && params[:token]
+    user = User.find_by(reset_token: params[:token])
+
+    if user.present? && user.reset_expire < Time.now
+      user.update({
+                    password: @new_password.password,
+                    password_confirmation: @new_password.password_confirmation,
+                    reset_token: nil,
+                    reset_expire: nil,
+                  })
+      redirect_to(:new_session)
+    else
+      redirect_to(root_url)
+    end
+
   end
 
+  private
+
   def recover_params
-    params.require(:recover_password_form).permit(:email)
+    params.require(:recover_password_form_new).permit(:email)
+  end
+
+  def new_pass_params
+    params.require(:recover_password_form_edit).permit(:password, :password_confirmation)
   end
 end
