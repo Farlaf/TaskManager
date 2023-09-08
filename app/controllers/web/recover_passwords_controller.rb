@@ -7,8 +7,14 @@ class Web::RecoverPasswordsController < Web::ApplicationController
     @recover = RecoverPasswordForm.new(recover_params)
 
     if @recover.valid?
-      user = User.find_by(email: @recover.email)
+      user = @recover.user
+
+      token = SecureRandom.urlsafe_base64
+      expire_time = 24.hour.from_now
+      user.update!({ reset_token: token, reset_expire: expire_time })
+
       UserMailer.with({ user: user }).recover_password.deliver_now
+
       redirect_to(:new_session)
     else
       render(:new)

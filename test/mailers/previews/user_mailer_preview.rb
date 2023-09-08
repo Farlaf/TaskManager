@@ -13,7 +13,7 @@ class UserMailerPreview < ActionMailer::Preview
   end
 
   def recover_password
-    UserMailer.with({user: User.first}).recover_password
+    UserMailer.with({ user: User.first }).recover_password
   end
 
   private
