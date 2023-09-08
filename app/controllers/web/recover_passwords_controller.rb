@@ -28,11 +28,11 @@ class Web::RecoverPasswordsController < Web::ApplicationController
   def update
     @new_password = RecoverPasswordFormEdit.new(new_pass_params)
 
-    render(:edit) unless @new_password.valid? && params[:token]
+    render(:edit) if !@new_password.valid? || params[:token].blank?
     user = User.find_by(reset_token: params[:token])
 
-    if user.present? && user.reset_expire < Time.now
-      user.update({
+    if user.present? && user.reset_expire > Time.now
+      rez = user.update({
                     password: @new_password.password,
                     password_confirmation: @new_password.password_confirmation,
                     reset_token: nil,
