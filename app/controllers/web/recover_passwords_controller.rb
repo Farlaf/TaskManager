@@ -7,14 +7,15 @@ class Web::RecoverPasswordsController < Web::ApplicationController
     @recover = RecoverPasswordForm.new(recover_params)
 
     if @recover.valid?
-      # отправить письмо
+      user = User.find_by(email: @recover.email)
+      UserMailer.with({ user: user }).recover_password.deliver_now
       redirect_to(:new_session)
     else
       render(:new)
     end
   end
 
-  def set
+  def edit
     # форма куда вводить пароли
   end
 

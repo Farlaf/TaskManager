@@ -12,12 +12,16 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.with(mail_info).task_destroy
   end
 
+  def recover_password
+    UserMailer.with({user: User.first}).recover_password
+  end
+
   private
 
   def mail_info
     user = User.first
     task = Task.first
 
-    params = { user: user, task: task }
+    { user: user, task: task }
   end
 end

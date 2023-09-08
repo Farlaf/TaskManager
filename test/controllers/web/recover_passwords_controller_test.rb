@@ -12,7 +12,9 @@ class Web::RecoverPasswordsControllerTest < ActionController::TestCase
     attrs = {
       email: user.email,
     }
-    post :create, params: { recover_password_form: attrs }
+    assert_emails 1 do
+      post :create, params: { recover_password_form: attrs }
+    end
     assert_response :redirect
   end
 end
