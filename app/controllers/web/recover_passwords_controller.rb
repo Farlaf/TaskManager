@@ -1,4 +1,7 @@
 class Web::RecoverPasswordsController < Web::ApplicationController
+  include RecoverPasswordsHelper
+  before_action :get_user, :token_correct?, only: [:edit, :update]
+
   def new
     @recover = RecoverPasswordFormNew.new
   end
@@ -15,6 +18,7 @@ class Web::RecoverPasswordsController < Web::ApplicationController
 
       UserMailer.with({ user: user }).recover_password.deliver_now
 
+      flash[:notice] = 'Link to generate new password send to your email'
       redirect_to(root_url)
     else
       render(:new)
@@ -28,21 +32,17 @@ class Web::RecoverPasswordsController < Web::ApplicationController
   def update
     @new_password = RecoverPasswordFormEdit.new(new_pass_params)
 
-    render(:edit) if !@new_password.valid? || params[:token].blank?
-    user = User.find_by(reset_token: params[:token])
+    render(:edit) if !@new_password.valid?
 
-    if user.present? && user.reset_expire > Time.now
-      rez = user.update({
-                    password: @new_password.password,
-                    password_confirmation: @new_password.password_confirmation,
-                    reset_token: nil,
-                    reset_expire: nil,
-                  })
-      redirect_to(:new_session)
-    else
-      redirect_to(root_url)
-    end
+    @user.update({
+                   password: @new_password.password,
+                   password_confirmation: @new_password.password_confirmation,
+                   reset_token: nil,
+                   reset_expire: nil,
+                 })
 
+    flash[:notice] = 'Password updated, use new password'
+    redirect_to(:new_session)
   end
 
   private
