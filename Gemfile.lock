@@ -90,6 +90,7 @@ GEM
     case_transform (0.2)
       activesupport
     concurrent-ruby (1.2.2)
+    connection_pool (2.4.1)
     coveralls_reborn (0.25.0)
       simplecov (>= 0.18.1, < 0.22.0)
       term-ansicolor (~> 1.6)
@@ -225,6 +226,8 @@ GEM
     rb-fsevent (0.11.2)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis-client (0.17.0)
+      connection_pool
     regexp_parser (2.8.1)
     responders (3.1.0)
       actionpack (>= 5.2)
@@ -262,6 +265,11 @@ GEM
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
     semantic_range (3.0.0)
+    sidekiq (7.1.2)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      rack (>= 2.2.4)
+      redis-client (>= 0.14.0)
     simple_form (5.2.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
@@ -362,6 +370,7 @@ DEPENDENCIES
   rubocop
   sass-rails (>= 6)
   selenium-webdriver (>= 4.0.0.rc1)
+  sidekiq
   simple_form
   simplecov
   simplecov-lcov (~> 0.8.0)
