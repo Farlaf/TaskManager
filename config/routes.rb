@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resource :board, only: :show
     resource :session, only: [:new, :create, :destroy]
     resources :developers, only: [:new, :create]
-    resource :recover_passwords, only: [:new, :create, :edit, :update]
+    resource :recover_password, only: [:new, :create, :edit, :update]
   end
 
   namespace :admin do

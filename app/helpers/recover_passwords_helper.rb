@@ -10,7 +10,7 @@ module RecoverPasswordsHelper
   def token_correct?
     unless @user.reset_expire > Time.now
       flash[:notice] = 'incorrect token'
-      redirect_to(new_recover_passwords_path)
+      redirect_to(new_recover_password_path)
     end
   end
 end
