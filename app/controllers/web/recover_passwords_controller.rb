@@ -14,7 +14,7 @@ class Web::RecoverPasswordsController < Web::ApplicationController
     expire_time = 24.hour.from_now
     user.update!({ reset_token: token, reset_expire: expire_time })
 
-    UserMailer.with({ user: user }).recover_password.deliver_now
+      UserMailer.with({ user: user }).recover_password.deliver_later
 
     flash[:notice] = 'Link to generate new password send to your email'
     redirect_to(root_url)

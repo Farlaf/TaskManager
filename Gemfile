@@ -46,6 +46,7 @@ gem 'rollbar'
 
 gem 'newrelic_rpm'
 gem 'sidekiq'
+gem 'sidekiq-failures'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

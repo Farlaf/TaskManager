@@ -270,6 +270,8 @@ GEM
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
       redis-client (>= 0.14.0)
+    sidekiq-failures (1.0.4)
+      sidekiq (>= 4.0.0)
     simple_form (5.2.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
@@ -371,6 +373,7 @@ DEPENDENCIES
   sass-rails (>= 6)
   selenium-webdriver (>= 4.0.0.rc1)
   sidekiq
+  sidekiq-failures
   simple_form
   simplecov
   simplecov-lcov (~> 0.8.0)
