@@ -9,14 +9,12 @@ class RecoverPasswordFormNew
   validate :user_valid?
 
   def user
-    User.find_by(email: email)
+    user ||= User.find_by(email: email)
   end
 
   private
 
   def user_valid?
-    if user.blank?
-      errors.add(:email, "email doesn't math")
-    end
+    errors.add(:email, :email_not_found) if user.blank?
   end
 end
