@@ -14,7 +14,7 @@ if ENV['CI']
 
     end
 
-    add_filter ['version.rb', 'initializer.rb', 'initializer.rb', 'config.rb']
+    add_filter ['version.rb', 'initializer.rb', 'config.rb']
   end
 end
 
