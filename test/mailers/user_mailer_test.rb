@@ -34,7 +34,7 @@ class UserMailerTest < ActionMailer::TestCase
   end
 
   test 'task destroy' do
-    email = UserMailer.with(@params).task_destroy
+    email = UserMailer.with({ user: @user, task_id: @task.id }).task_destroy
 
     assert_emails 1 do
       email.deliver_later

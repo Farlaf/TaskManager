@@ -45,8 +45,9 @@ gem 'nokogiri', '>= 1.15.4'
 gem 'rollbar'
 
 gem 'newrelic_rpm'
-gem 'sidekiq'
+gem 'sidekiq', '~> 6.5'
 gem 'sidekiq-failures'
+gem 'sidekiq-throttled'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
