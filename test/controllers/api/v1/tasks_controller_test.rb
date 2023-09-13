@@ -61,7 +61,7 @@ class Api::V1::TasksControllerTest < ActionController::TestCase
     assert !Task.where(id: task.id).exists?
   end
 
-  test 'shoild put attach_image' do
+  test 'should put attach_image' do
     task = create(:task, author: @author)
 
     image = file_fixture('image.jpg')
@@ -76,8 +76,7 @@ class Api::V1::TasksControllerTest < ActionController::TestCase
     put :attach_image, params: { id: task.id, attachment: attachment_params, format: :json }
     assert_response :success
 
-    task.reload
-    assert { task.image.attached? }
+    assert task.image.attached?
   end
 
   test 'should put remove_image' do
@@ -92,6 +91,6 @@ class Api::V1::TasksControllerTest < ActionController::TestCase
     assert_response :success
 
     task.reload
-    refute { task.image.attached? }
+    refute task.image.attached?
   end
 end
