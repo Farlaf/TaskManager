@@ -1,5 +1,5 @@
 class TaskSerializer < ApplicationSerializer
-  attributes :id, :name, :description, :state, :expired_at, :transitions
+  attributes :id, :name, :description, :state, :expired_at, :transitions, :image_url
   belongs_to :author
   belongs_to :assignee
 
