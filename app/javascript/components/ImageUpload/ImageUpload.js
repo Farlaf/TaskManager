@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 import ReactCrop, { makeAspectCrop } from 'react-image-crop';
-import useStyles from './useStyles';
+import 'react-image-crop/dist/ReactCrop.css';
+
 import Button from '@material-ui/core/Button';
 import { isNil, path } from 'ramda';
 import PropTypes from 'prop-types';
+
+import useStyles from './useStyles';
 
 function ImageUpload({ onUpload }) {
   const styles = useStyles();
 
   const DEFAULT_CROP_PARAMS = {
-    aspect: 1,
-    width: 150,
-    height: 150,
-    minWidth: 100,
-    minHeight: 100,
-    x: 0,
-    y: 0,
+    unit: '%',
+    width: 50,
+    height: 50,
+    x: 25,
+    y: 25,
   };
 
   const [fileAsBase64, changeFileAsBase64] = useState(null);
@@ -28,9 +29,10 @@ function ImageUpload({ onUpload }) {
   };
 
   const onImageLoaded = (loadedImage) => {
-    const newCropParams = makeAspectCrop(DEFAULT_CROP_PARAMS, loadedImage.width, loadedImage.height);
+    const { naturalWidth: width, naturalHeight: height } = loadedImage.currentTarget;
+    const newCropParams = makeAspectCrop(DEFAULT_CROP_PARAMS, width, height);
     changeCropParams(newCropParams);
-    changeImage(loadedImage);
+    changeImage(loadedImage.currentTarget);
   };
 
   const getActualCropParameters = (width, height, params) => ({
@@ -66,14 +68,9 @@ function ImageUpload({ onUpload }) {
   return fileAsBase64 ? (
     <>
       <div className={styles.crop}>
-        <ReactCrop
-          src={fileAsBase64}
-          crop={cropParams}
-          onImageLoaded={onImageLoaded}
-          onComplete={handleCropComplete}
-          onChange={handleCropChange}
-          keepSelection
-        />
+        <ReactCrop crop={cropParams} onComplete={handleCropComplete} onChange={handleCropChange} keepSelection>
+          <img src={fileAsBase64} onLoad={onImageLoaded} alt="new" />
+        </ReactCrop>
       </div>
       <Button variant="contained" size="small" color="primary" disabled={isNil(image)} onClick={handleSave}>
         Save

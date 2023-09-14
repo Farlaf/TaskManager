@@ -9,6 +9,7 @@ export default new PropTypesPresenter({
   assignee: PropTypes.object,
   state: PropTypes.string,
   transitions: PropTypes.arrayOf(PropTypes.object),
+  imageUrl: PropTypes.string,
 });
 
 export const STATES = [
