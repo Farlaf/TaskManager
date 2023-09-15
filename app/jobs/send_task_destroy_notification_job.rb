@@ -1,7 +1,4 @@
-class SendTaskDestroyNotificationJob < ApplicationJob
-  sidekiq_options queue: :mailers
-  sidekiq_throttle_as :mailer
-
+class SendTaskDestroyNotificationJob < MailerJob
   def perform(user_id, task_id)
     user = User.find_by(id: user_id)
     return if user.blank?
