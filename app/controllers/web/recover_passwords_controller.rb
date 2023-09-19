@@ -16,19 +16,18 @@ class Web::RecoverPasswordsController < Web::ApplicationController
 
   def edit
     @new_password = RecoverPasswordFormEdit.new
+    return user_not_found if user.nil?
     redirect_to(new_recover_password_path, notice: 'incorrect token') if RecoverPasswordService.token_invalid?(user)
   end
 
   def update
     @new_password = RecoverPasswordFormEdit.new(new_pass_params)
     return render(:edit) if @new_password.invalid?
+    return user_not_found if user.nil?
 
     RecoverPasswordService.set_password!(user, @new_password.password)
-
     redirect_to(:new_session, notice: 'Password updated, use new password')
   end
-
-  rescue_from ActiveRecord::RecordNotFound, with: :user_not_found
 
   private
 
@@ -42,6 +41,8 @@ class Web::RecoverPasswordsController < Web::ApplicationController
 
   def user
     @user ||= User.find_by_reset_token!(params[:token])
+  rescue ActiveRecord::RecordNotFound
+    nil
   end
 
   def user_not_found
