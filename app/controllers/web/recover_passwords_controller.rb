@@ -41,9 +41,7 @@ class Web::RecoverPasswordsController < Web::ApplicationController
   end
 
   def user
-    @user ||= User.find_by_reset_token!(params[:token])
-  rescue ActiveRecord::RecordNotFound
-    nil
+    @user ||= User.find_by_reset_token(params[:token])
   end
 
   def user_not_found
