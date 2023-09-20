@@ -1,10 +1,10 @@
 class Web::RecoverPasswordsController < Web::ApplicationController
   def new
-    @recover = RecoverPasswordFormNew.new
+    @recover = RecoverPassword.new
   end
 
   def create
-    @recover = RecoverPasswordFormNew.new(recover_params)
+    @recover = RecoverPassword.new(recover_params)
     return render(:new) if @recover.invalid?
 
     user = @recover.user
@@ -15,13 +15,14 @@ class Web::RecoverPasswordsController < Web::ApplicationController
   end
 
   def edit
-    @new_password = RecoverPasswordFormEdit.new
+    @new_password = NewPassword.new
     return user_not_found if user.nil?
+
     redirect_to(new_recover_password_path, notice: 'incorrect token') if RecoverPasswordService.token_invalid?(user)
   end
 
   def update
-    @new_password = RecoverPasswordFormEdit.new(new_pass_params)
+    @new_password = NewPassword.new(new_pass_params)
     return render(:edit) if @new_password.invalid?
     return user_not_found if user.nil?
 
@@ -32,11 +33,11 @@ class Web::RecoverPasswordsController < Web::ApplicationController
   private
 
   def recover_params
-    params.require(:recover_password_form_new).permit(:email)
+    params.require(:recover_password).permit(:email)
   end
 
   def new_pass_params
-    params.require(:recover_password_form_edit).permit(:password, :password_confirmation)
+    params.require(:new_password).permit(:password, :password_confirmation)
   end
 
   def user
