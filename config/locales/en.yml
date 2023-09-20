@@ -5,5 +5,5 @@ en:
         password_recovery:
           attributes:
             email:
-              email_not_found: "Email doesn't math"
+              email_not_found: "Email doesn't match"
 
