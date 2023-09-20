@@ -13,7 +13,7 @@ class Web::RecoverPasswordsControllerTest < ActionController::TestCase
       email: user.email,
     }
     assert_emails 1 do
-      post :create, params: { recover_password_form_new: attrs }
+      post :create, params: { recover_password: attrs }
     end
     assert_response :redirect
   end
@@ -32,14 +32,14 @@ class Web::RecoverPasswordsControllerTest < ActionController::TestCase
     attrs = {
       email: user.email,
     }
-    post :create, params: { recover_password_form_new: attrs }
+    post :create, params: { recover_password: attrs }
 
     token = user.reload.reset_token
     reset_attrs = {
       password: 'new_pass',
       password_confirmation: 'new_pass',
     }
-    post :update, params: { token: token, recover_password_form_edit: reset_attrs }
+    post :update, params: { token: token, new_password: reset_attrs }
 
     assert_not_equal user.password_digest, user.reload.password_digest
     assert_response :redirect
