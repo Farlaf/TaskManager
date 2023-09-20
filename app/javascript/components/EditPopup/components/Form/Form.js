@@ -7,23 +7,14 @@ import TextField from '@material-ui/core/TextField';
 import useStyles from './useStyles';
 import UserSelect from 'components/UserSelect';
 
-import TasksRepository from 'repositories/TasksRepository';
 import TaskPresenter from 'presenters/TaskPresenter';
 import ImageUpload from 'components/ImageUpload';
 import { Button } from '@material-ui/core';
 
-function Form({ errors, onChange, task }) {
+function Form({ errors, onChange, task, onAttachImage, onRemoveImage }) {
   const handleChangeTextField = (fieldName) => (event) => onChange({ ...task, [fieldName]: event.target.value });
   const handleChangeSelect = (fieldName) => (user) => onChange({ ...task, [fieldName]: user });
   const styles = useStyles();
-
-  const onAttachImage = (image) => {
-    TasksRepository.attach_image(task.id, image);
-  };
-
-  const onRemoveImage = () => {
-    TasksRepository.removeImage(task.id);
-  };
 
   return (
     <form className={styles.root}>
@@ -65,12 +56,17 @@ function Form({ errors, onChange, task }) {
       />
       {isNil(TaskPresenter.imageUrl(task)) ? (
         <div className={styles.imageUploadContainer}>
-          <ImageUpload onUpload={onAttachImage} />
+          <ImageUpload onUpload={(image) => onAttachImage(TaskPresenter.id(task), image)} />
         </div>
       ) : (
         <div className={styles.previewContainer}>
           <img className={styles.preview} src={TaskPresenter.imageUrl(task)} alt="Attachment" />
-          <Button variant="contained" size="small" color="primary" onClick={onRemoveImage}>
+          <Button
+            variant="contained"
+            size="small"
+            color="primary"
+            onClick={() => onRemoveImage(TaskPresenter.id(task))}
+          >
             Remove image
           </Button>
         </div>
@@ -88,6 +84,8 @@ Form.propTypes = {
     author: PropTypes.arrayOf(PropTypes.string),
     assignee: PropTypes.arrayOf(PropTypes.string),
   }),
+  onAttachImage: PropTypes.func.isRequired,
+  onRemoveImage: PropTypes.func.isRequired,
 };
 
 Form.defaultProps = {

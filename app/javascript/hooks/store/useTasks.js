@@ -5,7 +5,16 @@ import TaskForm from 'forms/TaskForm';
 
 const useTasks = () => {
   const board = useSelector((state) => state.TasksSlice.board);
-  const { loadColumn, loadColumnMore, destroyTask, updateTask, createTask, showTask } = useTasksActions();
+  const {
+    loadColumn,
+    loadColumnMore,
+    destroyTask,
+    updateTask,
+    createTask,
+    showTask,
+    attachTaskImage,
+    removeTaskImage,
+  } = useTasksActions();
 
   const loadBoard = () => Promise.all(STATES.map(({ key }) => loadColumn(key)));
 
@@ -61,6 +70,8 @@ const useTasks = () => {
     addTask,
     deleteTask,
     editTask,
+    attachTaskImage,
+    removeTaskImage,
   };
 };
 
