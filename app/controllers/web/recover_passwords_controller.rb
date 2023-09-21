@@ -10,7 +10,7 @@ class Web::RecoverPasswordsController < Web::ApplicationController
     user = @recover.user
     RecoverPasswordService.create_reset_token!(user)
 
-    UserMailer.with({ user: user }).recover_password.deliver_now
+    SendRecoverPasswordLinkJob.perform_async(user.id)
     redirect_to(root_url, notice: 'Link to generate new password send to your email')
   end
 
