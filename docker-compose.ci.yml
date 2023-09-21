@@ -9,6 +9,8 @@ services:
       - db
     environment:
       - COVERAGE
+      - CI=true
+      - COVERALLS_REPO_TOKEN
       - RAILS_ENV
       - DATABASE_HOST=db
       - DATABASE_USERNAME=postgres

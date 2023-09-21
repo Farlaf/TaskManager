@@ -34,8 +34,15 @@
              = link_to "Sign up", new_developer_path, class: 'mdl-navigation__link'
 
      main#main.mdl-layout__content
-       .page-content
-         = yield
+        .page-content
+          - flash.each do |type, msg|
+            .mdl-chip.mdl-chip--contact
+              .mdl-chip__contact.mdl-color--teal.mdl-color-text--white
+                | i
+              .mdl-chip__text
+                = msg
+
+          = yield
      footer#footer.mdl-mini-footer
        .mdl-mini-footer__left-section
          .mdl-logo

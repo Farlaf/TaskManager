@@ -1,0 +1,8 @@
+h4 Enter new password
+
+= simple_form_for @new_password, method: :patch, url: recover_password_path(token: params[:token]) do |f|
+    p
+        = f.input :password
+        = f.input :password_confirmation
+    p
+        = f.button :submit, "Save"
