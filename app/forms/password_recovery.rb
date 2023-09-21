@@ -1,4 +1,4 @@
-class RecoverPasswordFormNew
+class PasswordRecovery
   include ActiveModel::Model
 
   attr_accessor(
@@ -9,7 +9,7 @@ class RecoverPasswordFormNew
   validate :user_valid?
 
   def user
-    user ||= User.find_by(email: email)
+    @user ||= User.find_by(email: email)
   end
 
   private

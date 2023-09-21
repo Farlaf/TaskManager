@@ -1,4 +1,4 @@
-class RecoverPasswordFormEdit
+class PasswordSet
   include ActiveModel::Model
 
   attr_accessor(
