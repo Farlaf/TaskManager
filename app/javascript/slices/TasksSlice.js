@@ -82,6 +82,11 @@ export const useTasksActions = () => {
 
   const destroyTask = (id) => TasksRepository.destroy(id);
 
+  const attachTaskImage = (id, params) => {
+    TasksRepository.attach_image(id, params);
+  };
+  const removeTaskImage = (id) => TasksRepository.removeImage(id);
+
   return {
     loadBoard,
     loadColumn,
@@ -90,5 +95,7 @@ export const useTasksActions = () => {
     createTask,
     showTask,
     destroyTask,
+    attachTaskImage,
+    removeTaskImage,
   };
 };
